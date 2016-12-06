@@ -4,10 +4,10 @@ var mysql = require('mysql');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' }); 
+  res.render('index', { title: 'Election 2016 Polling Analysis' }); 
 });
 
-router.post('/', function(req, res) {
+router.post('/graph', function(req, res) {
 
   console.log(req.body);
   var db = mysql.createConnection({
@@ -78,7 +78,7 @@ router.post('/', function(req, res) {
   db.query(stateListQuery, function(err, rows, fields) {
     if (err) throw err;
 
-    res.render('indexAfter', { title: 'Express', rows: rows });
+    res.render('graph', { title: 'Election 2016 Polling Analysis', rows: rows });
   });
 
   db.end();
