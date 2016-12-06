@@ -72,16 +72,34 @@ router.post('/graph', function(req, res) {
   }
   else { stateListQuery += "AND AmericanIndian<=100 "; }
 
-  
-  console.log(stateListQuery);
+
+  /* END STATELISTQUERY BUILD */
+
+  var states;
 
   db.query(stateListQuery, function(err, rows, fields) {
     if (err) throw err;
 
+    var states = rows;
+
+    for (var i = 0; i < states.length; i++) {
+      var pollDateQuery = "SELECT DISTINCT Date, State, AVG(Clinton), AVG(Trump) FROM polls WHERE polls.State='";
+      pollDateQuery += states[i].Name;
+      pollDateQuery += "' GROUP BY Date ORDER BY polls.Date";
+
+      console.log(pollDateQuery);
+
+      db.query(pollDateQuery, function(err, rows, fields) {
+        if (err) throw err;
+
+        console.log(rows[0]);
+      });
+
+    }
+
     res.render('graph', { title: 'Election 2016 Polling Analysis', rows: rows });
   });
 
-  db.end();
 });
 
 module.exports = router;

@@ -7,7 +7,7 @@
 6 silly lifecycle election2016@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle election2016@0.0.0~start: election2016@0.0.0
 8 verbose lifecycle election2016@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle election2016@0.0.0~start: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/home/jsp/school/CS336/election2016/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+9 verbose lifecycle election2016@0.0.0~start: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/home/jsp/school/CS336/election2016/node_modules/.bin:/home/jsp/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
 10 verbose lifecycle election2016@0.0.0~start: CWD: /home/jsp/school/CS336/election2016
 11 silly lifecycle election2016@0.0.0~start: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle election2016@0.0.0~start: Returned: code: 1  signal: null
