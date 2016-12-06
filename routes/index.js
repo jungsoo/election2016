@@ -100,7 +100,7 @@ router.post('/graph', function(req, res) {
 
     setTimeout(function() {
       res.render('graph', { title: 'Election 2016 Polling Analysis', states: states, results: results });
-    }, 3000);
+    }, 1500);
   });
 
 });
