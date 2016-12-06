@@ -6,8 +6,34 @@ block content
 
   form(method="post")
     div.input
-      span.label Age
-      input(type="range", name="age")
+      div.ethnicity
+        h3 Ethnicity
+        p 
+          label White Voter - Lower End
+          input(type="number", name="whiteLower", min="0", max="100")
+          label White Voter - Upper End
+          input(type="number", name="whiteUpper", min="0", max="100")
+        p
+          label Black Voter - Lower End
+          input(type="number", name="blackLower", min="0", max="100")
+          label Black Voter - Upper End
+          input(type="number", name="blackUpper", min="0", max="100")
+        p
+          label Hispanic Voter - Lower End
+          input(type="number", name="hispanicLower", min="0", max="100")
+          label Hispanic Voter - Upper End
+          input(type="number", name="hispanicUpper", min="0", max="100")
+        p
+          label Asian Voter - Lower End
+          input(type="number", name="asianLower", min="0", max="100")
+          label Asian Voter - Upper End
+          input(type="number", name="asianUpper", min="0", max="100")
+        p
+          label Native-American Voter - Lower End
+          input(type="number", name="natLower", min="0", max="100")
+          label Native-American Voter - Upper End
+          input(type="number", name="natUpper", min="0", max="100")
+
     div.actions
       input(type="submit", value="Submit")
   

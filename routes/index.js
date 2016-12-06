@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res) {
 
+  console.log(req.body);
   var db = mysql.createConnection({
     host: 'election2016.cfkfg0dg7ypb.us-east-1.rds.amazonaws.com',
     user: 'root',
@@ -17,10 +18,66 @@ router.post('/', function(req, res) {
   });
 
   db.connect();
-  db.query('SELECT polls.State, Date FROM polls, state WHERE state.Age65 >= 0.17 AND polls.State = state.Name', function(err, rows, fields) {
+
+  var stateListQuery = "SELECT Name FROM state WHERE ";
+
+  // BUILD QUERY FOR LIST OF STATES
+  // White
+  if (req.body.whiteLower) {
+    stateListQuery += "White>=" + req.body.whiteLower + " ";
+  }
+  else { stateListQuery += "White>=0 "; }
+  if (req.body.whiteUpper) {
+    stateListQuery += "AND White<=" + req.body.whiteUpper + " ";
+  }
+  else { stateListQuery += "AND White<=100 "; }
+
+  // Black
+  if (req.body.blackLower) {
+    stateListQuery += "AND Black>=" + req.body.blackLower + " ";
+  }
+  else { stateListQuery += "AND Black>=0 "; }
+  if (req.body.blackUpper) {
+    stateListQuery += "AND Black<=" + req.body.blackUpper + " ";
+  }
+  else { stateListQuery += "AND Black<=100 "; }
+
+  // Hispanic
+  if (req.body.hispanicLower) {
+    stateListQuery += "AND Hispanic>=" + req.body.hispanicLower + " ";
+  }
+  else { stateListQuery += "AND Hispanic>=0 "; }
+  if (req.body.hispanicUpper) {
+    stateListQuery += "AND Hispanic<=" + req.body.hispanicUpper + " ";
+  }
+  else { stateListQuery += "AND Hispanic<=100 "; }
+
+  // Asian
+  if (req.body.asianLower) {
+    stateListQuery += "AND Asian>=" + req.body.asianLower + " ";
+  }
+  else { stateListQuery += "AND Asian>=0 "; }
+  if (req.body.asianUpper) {
+    stateListQuery += "AND Asian<=" + req.body.asianUpper + " ";
+  }
+  else { stateListQuery += "AND Asian<=100 "; }
+
+  // AmericanIndian
+  if (req.body.natLower) {
+    stateListQuery += "AND AmericanIndian>=" + req.body.natLower + " ";
+  }
+  else { stateListQuery += "AND AmericanIndian>=0 "; }
+  if (req.body.natUpper) {
+    stateListQuery += "AND AmericanIndian<=" + req.body.natUpper + " ";
+  }
+  else { stateListQuery += "AND AmericanIndian<=100 "; }
+
+  
+  console.log(stateListQuery);
+
+  db.query(stateListQuery, function(err, rows, fields) {
     if (err) throw err;
 
-    console.log(rows[0]);
     res.render('indexAfter', { title: 'Express', rows: rows });
   });
 
