@@ -75,12 +75,11 @@ router.post('/graph', function(req, res) {
 
   /* END STATELISTQUERY BUILD */
 
-  var states;
-
   db.query(stateListQuery, function(err, rows, fields) {
     if (err) throw err;
 
     var states = rows;
+    var results;
 
     for (var i = 0; i < states.length; i++) {
       var pollDateQuery = "SELECT DISTINCT Date, State, AVG(Clinton), AVG(Trump) FROM polls WHERE polls.State='";
@@ -91,13 +90,17 @@ router.post('/graph', function(req, res) {
 
       db.query(pollDateQuery, function(err, rows, fields) {
         if (err) throw err;
-
-        console.log(rows[0]);
+        
+        results = rows;
+        console.log(results.length);
+        console.log(results);
       });
 
     }
 
-    res.render('graph', { title: 'Election 2016 Polling Analysis', rows: rows });
+    setTimeout(function() {
+      res.render('graph', { title: 'Election 2016 Polling Analysis', states: states, results: results });
+    }, 3000);
   });
 
 });

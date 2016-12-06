@@ -2,6 +2,9 @@ extends index
 
 block content
   h1= title
-  for row in rows
-    li #{row.Name}
+  for state in states
+    li #{state.Name}
+  
+  for result in results
+    li #{result}
 
