@@ -3,3 +3,11 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  form(method="post")
+    div.input
+      span.label Age
+      input(type="range", name="age")
+    div.actions
+      input(type="submit", value="Submit")
+  
