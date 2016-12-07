@@ -4,6 +4,19 @@ block content
   h1= title
   p Made by Jungsoo Park and Kevin Luo
 
+  div.info(style="width:60%")
+    p.
+      The purpose of this web application is to help provide insight about how
+      states can be swayed in a political election based on demographic and the
+      scandals that may occur during an election season.
+    p.
+      For all provided demographics below (except household income), input in a
+      percentage (0..100) to see the polling patterns of those states. Input a
+      range between $30,000 and $70,000 for median household income.
+    p.
+      You can also optionally choose a single scandal to juxtapose with how it may
+      (or may not) have influenced the election.
+
   form(method="post", action="graph")
     div.input
       div.ethnicity
@@ -35,5 +48,5 @@ block content
           input(type="number", name="natUpper", min="0", max="100")
 
     div.actions
-      input(type="submit", value="Submit")
+      input(type="submit", value="Show me graphs!")
   
