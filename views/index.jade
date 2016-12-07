@@ -19,8 +19,8 @@ block content
 
   form(method="post", action="graph")
     div.input
-      div.ethnicity
-        h3 Ethnicity
+      div.category
+        h2 Ethnicity
         p 
           label White Voter - Lower End
           input(type="number", name="whiteLower", min="0", max="100")
@@ -46,6 +46,50 @@ block content
           input(type="number", name="natLower", min="0", max="100")
           label Native-American Voter - Upper End
           input(type="number", name="natUpper", min="0", max="100")
+
+      div.category
+        h2 Education
+        p 
+          label High School Grad - Lower End
+          input(type="number", name="hsLower", min="0", max="100")
+          label High School Grad - Upper End
+          input(type="number", name="hsUpper", min="0", max="100")
+        p
+          label Bachelors Grad - Lower End
+          input(type="number", name="bachLower", min="0", max="100")
+          label Bachelors Grad - Upper End
+          input(type="number", name="bachUpper", min="0", max="100")
+        p
+          label Adv. Degree - Lower End
+          input(type="number", name="advLower", min="0", max="100")
+          label Adv. Degree - Upper End
+          input(type="number", name="advUpper", min="0", max="100")
+
+      div.category
+        h2 Age Groups
+        p 
+          label 18..25 Voter - Lower End
+          input(type="number", name="lower1825", min="0", max="100")
+          label 18..25 Voter - Upper End
+          input(type="number", name="upper1825", min="0", max="100")
+        p 
+          label 25..64 Voter - Lower End
+          input(type="number", name="lower2564", min="0", max="100")
+          label 25..64 Voter - Upper End
+          input(type="number", name="upper2564", min="0", max="100")
+        p 
+          label >65 Voter - Lower End
+          input(type="number", name="lower65", min="0", max="100")
+          label >65 Voter - Upper End
+          input(type="number", name="upper65", min="0", max="100")
+
+      div.category
+        h2 Median Household Income ($30,000..$70,000)
+        p 
+          label Median Household Income - Lower End
+          input(type="number", name="incomeLower", min="30000", max="70000")
+          label Median Household Income - Upper End
+          input(type="number", name="incomeUpper", min="30000", max="70000")
 
     div.actions
       input(type="submit", value="Show me graphs!")
