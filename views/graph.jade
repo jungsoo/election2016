@@ -6,29 +6,29 @@ block content
   a(href='/') 
     h1= title
 
-  canvas(id="myChart", width="800", height="400")
-  script.
-    var ctx = document.getElementById("myChart").getContext("2d");
-    var myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-        datasets: [{
-          label: 'apples',
-          data: [12, 19, 3, 17, 6, 3, 7],
-          backgroundColor: "rgba(153,255,51,0.4)"
-        }, {
-          label: 'oranges',
-          data: [2, 29, 5, 5, 2, 3, 10],
-          backgroundColor: "rgba(255,153,0,0.4)"
-        }]
-      }
-    });
-
-
-  for state in states
-    li #{state.Name}
-
   for result in results
-    li #{result}
+    h2 #{result.name} Poll Results
+    canvas(id="#{result.name}", width="600", height="300")
+    script.
+      var ctx = document.getElementById("#{result.name}").getContext("2d");
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: [#{result.dates}],
+
+          datasets: [{
+            fill: false,
+            label: 'Clinton',
+            data: [#{result.clintonAvgs}],
+            borderColor: "rgba(45,126,255,0.4)"
+          },
+          {
+            fill: false,
+            label: 'Trump',
+            data: [#{result.trumpAvgs}],
+            borderColor: "rgba(229, 9, 9, 0.4)"
+          }]
+
+        }
+      });
 

@@ -79,10 +79,10 @@ router.post('/graph', function(req, res) {
     if (err) throw err;
 
     var states = rows;
-    var results;
+    var results = [];
 
     for (var i = 0; i < states.length; i++) {
-      var pollDateQuery = "SELECT DISTINCT Date, State, AVG(Clinton), AVG(Trump) FROM polls WHERE polls.State='";
+      var pollDateQuery = "SELECT DISTINCT Date, State, AVG(Clinton) AS Clinton, AVG(Trump) AS Trump FROM polls WHERE polls.State='";
       pollDateQuery += states[i].Name;
       pollDateQuery += "' GROUP BY Date ORDER BY polls.Date";
 
@@ -90,16 +90,27 @@ router.post('/graph', function(req, res) {
 
       db.query(pollDateQuery, function(err, rows, fields) {
         if (err) throw err;
+
+        var stateData = {
+          name: rows[0].State,
+          dates: [],
+          clintonAvgs: [],
+          trumpAvgs: []
+        }
+
+        for (var j = 0; j < rows.length; j++) {
+          stateData.dates.push("'"+rows[j].Date+"'");
+          stateData.clintonAvgs.push(rows[j].Clinton);
+          stateData.trumpAvgs.push(rows[j].Trump);
+        }
         
-        results = rows;
-        console.log(results.length);
-        console.log(results);
+        results.push(stateData);
       });
 
     }
 
     setTimeout(function() {
-      res.render('graph', { title: 'Election 2016 Polling Analysis', states: states, results: results });
+      res.render('graph', { title: 'Election 2016 Polling Analysis', results: results });
     }, 1500);
   });
 
