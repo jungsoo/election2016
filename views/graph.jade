@@ -6,6 +6,11 @@ block content
   a(href='/') 
     h1= title
 
+  if scandal != "None"
+    h1 #{scandal.Title} - #{scandal.Date}
+    p.
+      #{scandal.Description}
+
   for result in results
     h2 #{result.name} Poll Results
     canvas(id="#{result.name}", width="600", height="300")

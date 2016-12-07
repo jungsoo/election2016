@@ -91,6 +91,15 @@ block content
           label Median Household Income - Upper End
           input(type="number", name="incomeUpper", min="30000", max="70000")
 
+      div.scandalbox(style="width:40em")
+        label(for="scandal") Scandal:
+        select.form-control(id="scandal", name="scandalTitle")
+          option.
+            No Scandal
+          for scandal in scandals
+            option.
+              #{scandal.Title}
+
     div.actions
       input(type="submit", value="Show me graphs!")
   

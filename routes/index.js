@@ -4,7 +4,20 @@ var mysql = require('mysql');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Election 2016 Polling Analysis' }); 
+  var db = mysql.createConnection({
+    host: 'election2016.cfkfg0dg7ypb.us-east-1.rds.amazonaws.com',
+    user: 'root',
+    password: 'password',
+    database: 'Election2016'
+  });
+  db.connect();
+
+  db.query("SELECT Title FROM scandals", function(err, rows, fields) {
+    if (err) throw err;
+
+    res.render('index', { title: 'Election 2016 Polling Analysis', scandals: rows }); 
+  });
+
 });
 
 router.post('/graph', function(req, res) {
@@ -144,18 +157,30 @@ router.post('/graph', function(req, res) {
 
   /* END STATELISTQUERY BUILD */
 
+
   db.query(stateListQuery, function(err, rows, fields) {
     if (err) throw err;
 
     var states = rows;
     var results = [];
+    var scandal;
+
+    if (req.body.scandalTitle !== "No Scandal") {
+      var queryScandal = "SELECT * FROM scandals WHERE Title='" + req.body.scandalTitle+"'";
+      db.query(queryScandal, function(err, rows, fields) {
+        if (err) throw err;
+
+        scandal = rows[0];
+        console.log(scandal);
+      });
+    } else { scandal = "None"; }
 
     for (var i = 0; i < states.length; i++) {
       var pollDateQuery = "SELECT DISTINCT Date, State, AVG(Clinton) AS Clinton, AVG(Trump) AS Trump FROM polls WHERE polls.State='";
       pollDateQuery += states[i].Name;
       pollDateQuery += "' GROUP BY Date ORDER BY polls.Date";
 
-      console.log(pollDateQuery);
+      // console.log(pollDateQuery);
 
       db.query(pollDateQuery, function(err, rows, fields) {
         if (err) throw err;
@@ -164,7 +189,7 @@ router.post('/graph', function(req, res) {
           name: rows[0].State,
           dates: [],
           clintonAvgs: [],
-          trumpAvgs: []
+          trumpAvgs: [],
         }
 
         for (var j = 0; j < rows.length; j++) {
@@ -179,7 +204,8 @@ router.post('/graph', function(req, res) {
     }
 
     setTimeout(function() {
-      res.render('graph', { title: 'Election 2016 Polling Analysis', results: results });
+      res.render('graph', { title: 'Election 2016 Polling Analysis', results: results, scandal: scandal });
+      db.end();
     }, 1500);
   });
 
