@@ -72,6 +72,75 @@ router.post('/graph', function(req, res) {
   }
   else { stateListQuery += "AND AmericanIndian<=100 "; }
 
+  // HSGRAD
+  if (req.body.hsLower) {
+    stateListQuery += "AND HighSchoolGraduatePercent>=" + req.body.hsLower + " ";
+  }
+  else { stateListQuery += "AND HighSchoolGraduatePercent>=0 "; }
+  if (req.body.hsUpper) {
+    stateListQuery += "AND HighSchoolGraduatePercent<=" + req.body.hsUpper + " ";
+  }
+  else { stateListQuery += "AND HighSchoolGraduatePercent<=100 "; }
+
+  // BACH GRAD
+  if (req.body.bachLower) {
+    stateListQuery += "AND BachelorPercent>=" + req.body.bachLower + " ";
+  }
+  else { stateListQuery += "AND BachelorPercent>=0 "; }
+  if (req.body.bachUpper) {
+    stateListQuery += "AND BachelorPercent<=" + req.body.bachUpper + " ";
+  }
+  else { stateListQuery += "AND BachelorPercent<=100 "; }
+
+  // ADV DEGR GRAD
+  if (req.body.advLower) {
+    stateListQuery += "AND AdvancedDegrPercent>=" + req.body.advLower + " ";
+  }
+  else { stateListQuery += "AND AdvancedDegrPercent>=0 "; }
+  if (req.body.advUpper) {
+    stateListQuery += "AND AdvancedDegrPercent<=" + req.body.advUpper + " ";
+  }
+  else { stateListQuery += "AND AdvancedDegrPercent<=100 "; }
+
+  // 18-25
+  if (req.body.lower1825) {
+    stateListQuery += "AND Age1825>=" + req.body.lower1825 + " ";
+  }
+  else { stateListQuery += "AND Age1825>=0 "; }
+  if (req.body.upper1825) {
+    stateListQuery += "AND Age1825<=" + req.body.upper1825 + " ";
+  }
+  else { stateListQuery += "AND Age1825<=100 "; }
+
+  // 25-64 
+  if (req.body.lower2564) {
+    stateListQuery += "AND Age2564>=" + req.body.lower2564 + " ";
+  }
+  else { stateListQuery += "AND Age2564>=0 "; }
+  if (req.body.upper2564) {
+    stateListQuery += "AND Age2564<=" + req.body.upper2564 + " ";
+  }
+  else { stateListQuery += "AND Age2564<=100 "; }
+
+  // 65
+  if (req.body.lower65) {
+    stateListQuery += "AND Age65>=" + req.body.lower65 + " ";
+  }
+  else { stateListQuery += "AND Age65>=0 "; }
+  if (req.body.upper65) {
+    stateListQuery += "AND Age65<=" + req.body.upper65 + " ";
+  }
+  else { stateListQuery += "AND Age65<=100 "; }
+
+  // income
+  if (req.body.incomeLower) {
+    stateListQuery += "AND MedianHouseholdIncome>=" + req.body.incomeLower + " ";
+  }
+  else { stateListQuery += "AND MedianHouseholdIncome>=30000 "; }
+  if (req.body.incomeUpper) {
+    stateListQuery += "AND MedianHouseholdIncome<=" + req.body.incomeUpper + " ";
+  }
+  else { stateListQuery += "AND MedianHouseholdIncome<=70000 "; }
 
   /* END STATELISTQUERY BUILD */
 
